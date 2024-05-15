@@ -14,6 +14,17 @@
     </node>
 
     <!-- Starting rviz -->
+    <group if="$(arg rviz)">
+    <!-- stuff that will only be evaluated if foo is true -->
     <node pkg="rviz" name="rviz" type="rviz" args="-d $(find camera)/config/cam_config.rviz"/>
+    </group>
+    
+
+    <node 
+    pkg="tf" 
+    type="static_transform_publisher" 
+    name="Camera_Frame" 
+    output="screen" 
+    args="0.53 0 0.67 0 0 3.14 map $(arg id) 100"/>
 
 </launch>
