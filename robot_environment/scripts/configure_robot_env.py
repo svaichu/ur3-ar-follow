@@ -22,14 +22,41 @@ def initialize_planning_obstacles():
     table_pose = PoseStamped()
     
     table_pose.header.frame_id = "base_link"  # Assuming the table's frame is in the robot's base frame
-    table_pose.pose.position = Point(0.0, 0.0, 0.0)  # Position of the obstacle in meters (x, y, z)
+    table_pose.pose.position = Point(0.0, 0.0, -0.01)  # Position of the obstacle in meters (x, y, z)
     table_pose.pose.orientation = Quaternion(0.0, 0.0, 0.0, 1.0)  # Orientation (quaternion) of the obstacle
     
-    table_normal = (0.0, 0.0, 1)  # Dimensions of the box in meters (x, y, z)
+    table_normal = (0.0, 0.0, 1)  
     
     # add it to the planning scene
     #scene.add_XYZ()
     scene.add_plane("table", table_pose, normal=table_normal)
+
+    # Configure pose of Camera Vertical
+    camera_vertical_pose = PoseStamped()
+    
+    camera_vertical_pose.header.frame_id = "base_link"  # Assuming the table's frame is in the robot's base frame
+    camera_vertical_pose.pose.position = Point(-0.61, 0.0, 0.0)  # Position of the obstacle in meters (x, y, z)
+    camera_vertical_pose.pose.orientation = Quaternion(0.0, 0.0, 0.0, 1.0)  # Orientation (quaternion) of the obstacle
+    
+    camera_vertical_normal = (-1, 0.0, 0)  # Dimensions of the box in meters (x, y, z)
+
+    # add it to the planning scene
+    #scene.add_XYZ()
+    scene.add_plane("camera_vertical", camera_vertical_pose, normal=camera_vertical_normal)
+
+    # Configure pose of Camera Horizontal
+
+    box_pose = PoseStamped()
+    box_pose.header.frame_id = "base_link"  # Assuming the obstacle's frame is in the robot's base frame
+    box_pose.pose.position = Point(-0.5025, 0.0, 0.77)  # Position of the obstacle in meters (x, y, z)
+    box_pose.pose.orientation = Quaternion(0.0, 0.0, 0.0, 1.0)  # Orientation (quaternion) of the obstacle
+    
+    box_size = (0.1075, 1, 0.2)  # Dimensions of the box in meters (x, y, z)
+    
+    # Add the box obstacle to the planning scene
+    scene.add_box("box_obstacle", box_pose, size=box_size)
+
+
 
 
 
@@ -44,7 +71,7 @@ def initialize_nozzle():
     # pose of nozzle relative to frame tool0
     nozzle_pose = PoseStamped()
     nozzle_pose.header.frame_id = "tool0"
-    nozzle_pose.pose.orientation = Quaternion(0.7071068, 0.0, 0.0, 0.7071068)
+    nozzle_pose.pose.orientation = Quaternion(0.7071068, 0, 0, 0.7071068)
     nozzle_pose.pose.position = Point(0.0, 0.0, 0.0001)
     
     
