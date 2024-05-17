@@ -72,7 +72,7 @@ def initialize_nozzle():
     nozzle_pose = PoseStamped()
     nozzle_pose.header.frame_id = "tool0"
     nozzle_pose.pose.orientation = Quaternion(0.7071068, 0, 0, 0.7071068)
-    nozzle_pose.pose.position = Point(0.0, 0.0, 0.0001)
+    nozzle_pose.pose.position = Point(0.0, 0.0, 0.001)
     
     
 
